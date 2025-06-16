@@ -1,11 +1,10 @@
 const express = require('express')
 const route = express.Router()
-const jwt_auth = require('../../middlewares/jwt_auth')
+const jwt_auth = require('../../middleware/jwt_auth')
 const UserServices = require('./service')
 const ClientError = require('../../exceptions/ClientError')
-const { validateUserPayload } = require('../../validator/users')
-const asyncHandler = require('../../middlewares/async_handler')
-const CollaborationService = require('../collaborations/services')
+const { validateUserPayload } = require('../../validators/users')
+const asyncHandler = require('../../middleware/async_handler')
 
 // add user
 route.post(
@@ -13,13 +12,12 @@ route.post(
   asyncHandler(async (req, res) => {
     await validateUserPayload(req.body)
 
-    const { nim, password, fullname, role, email } = req.body
+    const { username, password, fullname, email } = req.body
 
     const id = await new UserServices().addUser({
-      nim,
+      username,
       password,
       fullname,
-      role,
       email,
     })
     return res.status(201).json({
