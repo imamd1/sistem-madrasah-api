@@ -1,0 +1,24 @@
+services:
+  silab-db:
+    image: postgres
+    ports:
+      - 5433:5433
+    volumes:
+      - madrasah-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=m4dr4s4hv1!
+    networks:
+      - dbnetwork
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: djokoimam98@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: supersecret
+    ports:
+      - "8082:80"
+    networks:
+      - dbnetwork
+volumes:
+  madrasah-data:
+networks:
+  dbnetwork:

@@ -64,40 +64,5 @@ route.get(
   }),
 )
 
-route.get(
-  '/users/schedules/me',
-  jwt_auth(),
-  asyncHandler(async (req, res) => {
-    const { id: credentialId } = req.jwt
 
-    const schedules = await new UserServices().getUserSchedules({
-      credentialId,
-    })
-
-    res.status(200).json({
-      status: 'success',
-      message: 'Jadwal  berhasil ditampilkan',
-      data: schedules,
-    })
-  }),
-)
-
-route.get(
-  '/lecturers',
-  jwt_auth(),
-  asyncHandler(async (req, res) => {
-
-    const {id: credentialId} = req.jwt
-    
-    await new UserServices().verifyUserRole({credentialId}) 
-
-    const lecturers = await new UserServices().getLecturers()
-
-    return res.status(200).json({
-      status: 'success',
-      message: 'data retreived successfully',
-      data: lecturers
-    })
-  }),
-)
 module.exports = route
