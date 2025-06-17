@@ -11,7 +11,7 @@ class UserServices {
     this._pool = new Pool()
   }
 
-  async addUser({ username, password, fullname, role = 'JlYO', email}) {
+  async addUser({ username, password, fullname, role='NZCo', email}) {
     await this.verifyUsername(username)
     const id = `user-${nanoid(10)}`
     const hashedPassword = await bcyrpt.hash(password, 10)

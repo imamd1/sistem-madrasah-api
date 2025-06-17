@@ -12,13 +12,14 @@ route.post(
   asyncHandler(async (req, res) => {
     await validateUserPayload(req.body)
 
-    const { username, password, fullname, email } = req.body
+    const { username, password, fullname, email, role } = req.body
 
     const id = await new UserServices().addUser({
       username,
       password,
       fullname,
       email,
+      role
     })
     return res.status(201).json({
       status: 'success',
